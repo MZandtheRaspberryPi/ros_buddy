@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "buddy_msg/servo_tone_msg.h"
+#include "buddy_msg/buddy_control.h"
 
 
 /**
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
    * You must call one of the versions of ros::init() before using any other
    * part of the ROS system.
    */
-  ros::init(argc, argv, "talker");
+  ros::init(argc, argv, "controller");
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher buddy_pub = n.advertise<buddy_msg::servo_tone_msg>("buddy_control", 1000);
+  ros::Publisher buddy_pub = n.advertise<buddy_msg::buddy_control>("buddy_control", 1000);
 
   ros::Rate loop_rate(.2);
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-    buddy_msg::servo_tone_msg msg;
+    buddy_msg::buddy_control msg;
 
     msg.wordCount = 3;
 

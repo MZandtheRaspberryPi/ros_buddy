@@ -4,3 +4,11 @@ from tutorial, make sure have sourced /devel/setup.bash and that rosmsg show ser
 cd <sketchbook>/libraries
 rm -rf ros_lib
 rosrun rosserial_arduino make_libraries.py .
+
+
+Subscriber:
+http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
+
+http://wiki.ros.org/rosserial_client/Tutorials/Generating%20Message%20Header%20Files custom message gen arduino
+
+http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv ros msg creation

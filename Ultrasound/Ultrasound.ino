@@ -50,27 +50,27 @@ float checkUltra(int theEchoPin, int theTrigPin) {
 
 
 
-// Libraries
-#include <Servo.h>  //arduino library
-#include <math.h>   //standard c library
-
-#include "servoParallelControl.h"
-
-// Servos
-Servo baseServo;
-Servo nodServo;
-Servo tiltServo;
-
-// Robot Joint Motion Stuctures
-struct headPos {
-  int baseServoAngle;
-  int nodServoAngle ;
-  int tiltServoAngle ;
-  int desiredDelay ;
-};
-
-struct headPos faceMotion;  // Joint Positions of Head
-void moveTo( struct headPos faceMotion); 
+//// Libraries
+//#include <Servo.h>  //arduino library
+//#include <math.h>   //standard c library
+//
+//#include "servoParallelControl.h"
+//
+//// Servos
+//Servo baseServo;
+//Servo nodServo;
+//Servo tiltServo;
+//
+//// Robot Joint Motion Stuctures
+//struct headPos {
+//  int baseServoAngle;
+//  int nodServoAngle ;
+//  int tiltServoAngle ;
+//  int desiredDelay ;
+//};
+//
+//struct headPos faceMotion;  // Joint Positions of Head
+//void moveTo( struct headPos faceMotion); 
 
 
 
@@ -115,25 +115,25 @@ void loop()
   nh.spinOnce();
 }
 
-void moveTo( struct headPos faceMotion) {
-
-  int status1 = 0;
-  int status2 = 0;
-  int status3 = 0;
-  int done = 0 ;
-
-  while ( done == 0) {
-    //move all servos to the desired position
-    //this loop will cycle through the servos sending each the desired position.
-    //Each call will cause the servo to iterate about 1-5 degrees
-    //the rapid cycle of the loop makes the servos appear to move simultaneously
-    status1 = servoParallelControl(faceMotion.baseServoAngle, baseServo, faceMotion.desiredDelay);
-    status2 = servoParallelControl(faceMotion.nodServoAngle, nodServo, faceMotion.desiredDelay);
-    status3 = servoParallelControl(faceMotion.tiltServoAngle, tiltServo, faceMotion.desiredDelay);
-
-    //continue until all have reached the desired position
-    if (status1 == 1 & status2 == 1 & status3 == 1 ) {
-      done = 1;
-    }
-  }// end of while
-} //function end
+//void moveTo( struct headPos faceMotion) {
+//
+//  int status1 = 0;
+//  int status2 = 0;
+//  int status3 = 0;
+//  int done = 0 ;
+//
+//  while ( done == 0) {
+//    //move all servos to the desired position
+//    //this loop will cycle through the servos sending each the desired position.
+//    //Each call will cause the servo to iterate about 1-5 degrees
+//    //the rapid cycle of the loop makes the servos appear to move simultaneously
+//    status1 = servoParallelControl(faceMotion.baseServoAngle, baseServo, faceMotion.desiredDelay);
+//    status2 = servoParallelControl(faceMotion.nodServoAngle, nodServo, faceMotion.desiredDelay);
+//    status3 = servoParallelControl(faceMotion.tiltServoAngle, tiltServo, faceMotion.desiredDelay);
+//
+//    //continue until all have reached the desired position
+//    if (status1 == 1 & status2 == 1 & status3 == 1 ) {
+//      done = 1;
+//    }
+//  }// end of while
+//} //function end
