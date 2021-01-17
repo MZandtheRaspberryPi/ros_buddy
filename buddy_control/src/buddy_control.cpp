@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 
     msg.wordCount = 3;
 
-    ROS_INFO("%u", msg.wordCount);
+    ROS_INFO("Word Count: %u", msg.wordCount);
 
     /**
      * The publish() function is how you send messages. The parameter

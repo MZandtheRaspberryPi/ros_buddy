@@ -12,3 +12,15 @@ http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
 http://wiki.ros.org/rosserial_client/Tutorials/Generating%20Message%20Header%20Files custom message gen arduino
 
 http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv ros msg creation
+
+mz@mz-VirtualBox:~$ rosmsg show buddy_msg/buddy_control
+uint8 baseServoAngle
+uint8 nodServoAngle
+uint8 tiltServoAngle
+uint8 desiredDelay
+uint8 wordCount
+
+
+mz@mz-VirtualBox:~$ rostopic pub -l /buddyControl buddy_msg/buddy_control -- 90 110 110 3 3
+publishing and latching message. Press ctrl-C to terminate
+

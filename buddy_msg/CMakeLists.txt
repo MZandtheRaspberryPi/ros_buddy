@@ -51,7 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
    FILES
    buddy_control.msg
-#   Message2.msg
+   word_count.msg
  )
 
 ## Generate services in the 'srv' folder
