@@ -49,13 +49,9 @@ rosrun buddy_control buddy_dance
 I was on a virtual machine, so what I did is as follows. With the virtual machine shut down, I paired with the HC-06 using Windows and the bluetooth menu. Then I opened device manager and checked what COM ports were in use. I picked the lowest one, and input that into my virtual machine settings in terms of using the HOST serial port, and giving it to the guest machine. From here, I could access it using the address /dev/ttyS0.    
 ![bluetooth_settings](screenshots/bluetooth_settings.PNG)    
 
-Subscriber:
-http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
-
-http://wiki.ros.org/rosserial_client/Tutorials/Generating%20Message%20Header%20Files custom message gen arduino
-
-http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv ros msg creation
-
+### ROS Details
+The main message used to control the robot is a buddy_msg/buddy_control type message. A sensor_msgs/Range message is used to publish the Ultrasonic sensor range from the arduino.     
+```
 mz@mz-VirtualBox:~$ rosmsg show buddy_msg/buddy_control
 uint8 baseServoAngle
 uint8 nodServoAngle
@@ -63,7 +59,10 @@ uint8 tiltServoAngle
 uint8 desiredDelay
 uint8 wordCount
 
-
 mz@mz-VirtualBox:~$ rostopic pub -l /buddyControl buddy_msg/buddy_control -- 90 110 110 3 3
 publishing and latching message. Press ctrl-C to terminate
-
+```    
+The below ROS tutorials were all helpful to me, and may be helpful to you:    
+On publisher/subscribers: http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29    
+On custom message generation for rosserial: http://wiki.ros.org/rosserial_client/Tutorials/Generating%20Message%20Header%20Files     
+On creating a custom ROS Message: http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv    
