@@ -45,45 +45,74 @@ int main(int argc, char **argv)
    */
   ros::Publisher buddy_pub = n.advertise<buddy_msg::buddy_control>("buddyControl", 1000);
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(4);
 
   usleep(1000000);
 
-  // dance message 1 is to go to center, whistle then nod twice
-
+  // first dance is to make some noise, then head top left, down, top right, repeat
   buddy_msg::buddy_control msg1;
   msg1.wordCount = 0;
   msg1.baseServoAngle = 90;
-  msg1.nodServoAngle = 90;
+  msg1.nodServoAngle = 130;
   msg1.tiltServoAngle = 90;
   msg1.desiredDelay = 2;
 
   buddy_msg::buddy_control msg2;
-  msg2.wordCount = 10;
+  msg2.wordCount = 4;
   msg2.baseServoAngle = 0;
   msg2.nodServoAngle = 0;
   msg2.tiltServoAngle = 0;
   msg2.desiredDelay = 2;
 
-  buddy_msg::buddy_control msg3;
-  msg3.wordCount = 0;
-  msg3.baseServoAngle = 90;
-  msg3.nodServoAngle = 130;
-  msg3.tiltServoAngle = 90;
-  msg3.desiredDelay = 2;
+  if (ros::ok()) buddy_pub.publish(msg1);
+  ros::spinOnce();
+  loop_rate.sleep();
+  if (ros::ok()) buddy_pub.publish(msg2);
+  ros::spinOnce();
+  loop_rate.sleep();
 
-  buddy_msg::buddy_control dance_msgs[] = {msg1, msg2, msg3};
+
+  buddy_msg::buddy_control topLeftMsg;
+  topLeftMsg.wordCount = 0;
+  topLeftMsg.baseServoAngle = 140;
+  topLeftMsg.nodServoAngle = 120;
+  topLeftMsg.tiltServoAngle = 90;
+  topLeftMsg.desiredDelay = 4;
+
+  buddy_msg::buddy_control middle1Msg;
+  middle1Msg.wordCount = 2;
+  middle1Msg.baseServoAngle = 90;
+  middle1Msg.nodServoAngle = 160;
+  middle1Msg.tiltServoAngle = 140;
+  middle1Msg.desiredDelay = 4;
+
+  buddy_msg::buddy_control topRightMsg;
+  topRightMsg.wordCount = 0;
+  topRightMsg.baseServoAngle = 40;
+  topRightMsg.nodServoAngle = 120;
+  topRightMsg.tiltServoAngle = 90;
+  topRightMsg.desiredDelay = 4;
+
+  buddy_msg::buddy_control middle2Msg;
+  middle2Msg.wordCount = 2;
+  middle2Msg.baseServoAngle = 90;
+  middle2Msg.nodServoAngle = 160;
+  middle2Msg.tiltServoAngle = 40;
+  middle2Msg.desiredDelay = 4;
+
+
+  buddy_msg::buddy_control dance_msgs[] = {topLeftMsg, middle1Msg, topRightMsg, middle2Msg};
   size_t msg_count = sizeof(dance_msgs)/sizeof(dance_msgs[0]);
 
-  ROS_INFO("%zd Dance Messages to Send", msg_count);
-
-  for (int i = 0; i < msg_count; i++) {
-    if (not ros::ok()) break;
-    ROS_INFO("Sending dance message %d", i);
-    buddy_pub.publish(dance_msgs[i]);
-    ros::spinOnce();
-    loop_rate.sleep();
+  while (ros::ok()) {
+    for (int i = 0; i < msg_count; i++) {
+      if (not ros::ok()) break;
+      ROS_INFO("Sending dance message %d", i);
+      buddy_pub.publish(dance_msgs[i]);
+      ros::spinOnce();
+      loop_rate.sleep();
+    }
+    usleep(1000000);
   }
-
   return 0;
 }
