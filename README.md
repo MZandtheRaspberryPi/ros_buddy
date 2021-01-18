@@ -1,4 +1,6 @@
-# Slant Concepts Buddy Robot and ROS
+## Buddy Robot Dance with ROS
+This was a fun project to get a robot to dance using ROS. I used a robot from Slant Concepts and recoded it to work with ROS, via rosserial and a bluetooth connection.    
+![buddy_dance](./buddy_dance.gif)
 
 rosrun rosserial_python serial_node.py /dev/ttyS0 _baud:=9600
 
