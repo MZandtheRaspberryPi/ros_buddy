@@ -208,3 +208,6 @@ include_directories(
 add_executable(buddy_control src/buddy_control.cpp)
 target_link_libraries(buddy_control ${catkin_LIBRARIES})
 add_dependencies(buddy_control buddy_msg_generate_messages_cpp)
+add_executable(buddy_dance src/buddy_dance.cpp)
+target_link_libraries(buddy_dance ${catkin_LIBRARIES})
+add_dependencies(buddy_dance buddy_msg_generate_messages_cpp)
