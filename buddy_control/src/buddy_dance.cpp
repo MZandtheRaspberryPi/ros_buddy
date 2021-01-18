@@ -45,7 +45,7 @@ int main(int argc, char **argv)
    */
   ros::Publisher buddy_pub = n.advertise<buddy_msg::buddy_control>("buddyControl", 1000);
 
-  ros::Rate loop_rate(4);
+  ros::Rate loop_rate(10);
 
   usleep(1000000);
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
   msg1.desiredDelay = 2;
 
   buddy_msg::buddy_control msg2;
-  msg2.wordCount = 4;
+  msg2.wordCount = 7;
   msg2.baseServoAngle = 0;
   msg2.nodServoAngle = 0;
   msg2.tiltServoAngle = 0;
@@ -70,6 +70,30 @@ int main(int argc, char **argv)
   if (ros::ok()) buddy_pub.publish(msg2);
   ros::spinOnce();
   loop_rate.sleep();
+
+  buddy_msg::buddy_control tilt1;
+  tilt1.wordCount = 0;
+  tilt1.baseServoAngle = 90;
+  tilt1.nodServoAngle = 130;
+  tilt1.tiltServoAngle = 40;
+  tilt1.desiredDelay = 3;
+
+  buddy_msg::buddy_control tilt2;
+  tilt2.wordCount = 0;
+  tilt2.baseServoAngle = 90;
+  tilt2.nodServoAngle = 130;
+  tilt2.tiltServoAngle = 140;
+  tilt2.desiredDelay = 3;
+
+  for (int i =  0; i < 6; i++) {
+    ROS_INFO("head tilt cycle %d", i);
+    if (ros::ok()) buddy_pub.publish(tilt1);
+    ros::spinOnce();
+    loop_rate.sleep();
+    if (ros::ok()) buddy_pub.publish(tilt2);
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
 
 
   buddy_msg::buddy_control topLeftMsg;
@@ -100,19 +124,44 @@ int main(int argc, char **argv)
   middle2Msg.tiltServoAngle = 40;
   middle2Msg.desiredDelay = 4;
 
+  buddy_msg::buddy_control bottomLeftMsg;
+  bottomLeftMsg.wordCount = 0;
+  bottomLeftMsg.baseServoAngle = 40;
+  bottomLeftMsg.nodServoAngle = 170;
+  bottomLeftMsg.tiltServoAngle = 90;
+  bottomLeftMsg.desiredDelay = 4;
 
-  buddy_msg::buddy_control dance_msgs[] = {topLeftMsg, middle1Msg, topRightMsg, middle2Msg};
-  size_t msg_count = sizeof(dance_msgs)/sizeof(dance_msgs[0]);
+  buddy_msg::buddy_control bottomRightMsg;
+  bottomRightMsg.wordCount = 0;
+  bottomRightMsg.baseServoAngle = 40;
+  bottomRightMsg.nodServoAngle = 170;
+  bottomRightMsg.tiltServoAngle = 90;
+  bottomRightMsg.desiredDelay = 4;
+
+
+  buddy_msg::buddy_control v_dance_msgs[] = {topLeftMsg, middle1Msg, topRightMsg, middle2Msg};
+  size_t v_msg_count = sizeof(v_dance_msgs)/sizeof(v_dance_msgs[0]);
+
+  buddy_msg::buddy_control side_dance_msgs[] = {bottomLeftMsg, bottomRightMsg};
 
   while (ros::ok()) {
-    for (int i = 0; i < msg_count; i++) {
+    for (int i = 0; i < v_msg_count; i++) {
       if (not ros::ok()) break;
-      ROS_INFO("Sending dance message %d", i);
-      buddy_pub.publish(dance_msgs[i]);
+      ROS_INFO("Sending v dance message %d", i);
+      buddy_pub.publish(v_dance_msgs[i]);
       ros::spinOnce();
       loop_rate.sleep();
     }
     usleep(1000000);
+    for (int i = 0; i < 4; i++) {
+      ROS_INFO("side dance cycle %d", i);
+      if (ros::ok()) buddy_pub.publish(side_dance_msgs[0]);
+      ros::spinOnce();
+      loop_rate.sleep();
+      if (ros::ok()) buddy_pub.publish(side_dance_msgs[1]);
+      ros::spinOnce();
+      loop_rate.sleep();
+    }
   }
   return 0;
 }
