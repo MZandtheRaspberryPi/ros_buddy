@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 
   buddy_msg::servo_control middle1Msg;
   middle1Msg.baseServoAngle = 90;
-  middle1Msg.nodServoAngle = 160;
+  middle1Msg.nodServoAngle = 150;
   middle1Msg.tiltServoAngle = 140;
   middle1Msg.desiredDelay = 3;
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
 
   buddy_msg::servo_control middle2Msg;
   middle2Msg.baseServoAngle = 90;
-  middle2Msg.nodServoAngle = 160;
+  middle2Msg.nodServoAngle = 150;
   middle2Msg.tiltServoAngle = 40;
   middle2Msg.desiredDelay = 3;
 
@@ -165,7 +165,7 @@ int main(int argc, char **argv) {
   // or, c++ can't publish to arduino fast enough and stuff is getting dropped
   // with sleeps, it works, and slow publish rates
   usleep(250000);
-  send_note_msg(g, 300, buddy_music_pub, slow_rate);
+  send_note_msg(a, 300, buddy_music_pub, slow_rate);
   send_note_msg(f, 300, buddy_music_pub, slow_rate);
   send_note_msg(e, 300, buddy_music_pub, slow_rate); 
   usleep(250000);
@@ -174,13 +174,13 @@ int main(int argc, char **argv) {
 
   buddy_msg::servo_control bottomLeftMsg;
   bottomLeftMsg.baseServoAngle = 40;
-  bottomLeftMsg.nodServoAngle = 170;
+  bottomLeftMsg.nodServoAngle = 150;
   bottomLeftMsg.tiltServoAngle = 40;
   bottomLeftMsg.desiredDelay = 4;
 
   buddy_msg::servo_control bottomRightMsg;
   bottomRightMsg.baseServoAngle = 140;
-  bottomRightMsg.nodServoAngle = 170;
+  bottomRightMsg.nodServoAngle = 150;
   bottomRightMsg.tiltServoAngle = 140;
   bottomRightMsg.desiredDelay = 4;
 
