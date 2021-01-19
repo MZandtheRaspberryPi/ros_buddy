@@ -1,7 +1,5 @@
 #include <Servo.h> 
 
-#include "droidSpeak.h"
-
 // Servos
 Servo baseServo;
 Servo nodServo;
@@ -69,46 +67,31 @@ void moveTo(struct headPos faceMotion) {
   }// end of while
 } //function end
 
-void buddyControlCB(const buddy_msg::buddy_control& buddyControlMsg){
-
-  if (buddyControlMsg.wordCount != 0) droidSpeak(buzzerPin, buddyControlMsg.wordCount);
-
-  if (buddyControlMsg.baseServoAngle == 0 && buddyControlMsg.tiltServoAngle==0 && buddyControlMsg.nodServoAngle == 0) return;
-
-  faceMotion.baseServoAngle = constrain(buddyControlMsg.baseServoAngle, 10, 170);
-  faceMotion.tiltServoAngle = constrain(buddyControlMsg.tiltServoAngle, 20, 150);
-  faceMotion.nodServoAngle = constrain(buddyControlMsg.nodServoAngle, 80, 150);
-  
-  faceMotion.desiredDelay = buddyControlMsg.desiredDelay;
-  moveTo(faceMotion);
-}
-
-
 void servoControlCB(const buddy_msg::servo_control& servoControlMsg) {
   if (servoControlMsg.baseServoAngle == 0 && servoControlMsg.tiltServoAngle==0 && servoControlMsg.nodServoAngle == 0) return;
 
   if (servoControlMsg.baseServoAngle < 10 || servoControlMsg.baseServoAngle > 170) {
-    nh.logwarn("Base servo was commanded to %u but the range is 10 to 170. Constraining to this range.");
+    nh.logwarn("baseServoAngle out of range 10 to 70. Constraining to range.");
     faceMotion.baseServoAngle = constrain(servoControlMsg.baseServoAngle, 10, 170);
   }
   else {
-    faceMotion.baseServoAngle = servoControlMsg.baseServoAngle
+    faceMotion.baseServoAngle = servoControlMsg.baseServoAngle;
   }
 
-  if (servoControlMsg.tiltServoAngle < 10 || servoControlMsg.tiltServoAngle > 170) {
-    nh.logwarn("Base servo was commanded to %u but the range is 20 to 150. Constraining to this range.");
+  if (servoControlMsg.tiltServoAngle < 20 || servoControlMsg.tiltServoAngle > 150) {
+    nh.logwarn("tiltServoAngle out of range 20 to 150. Constraining to range.");
     faceMotion.tiltServoAngle = constrain(servoControlMsg.tiltServoAngle, 20, 150);
   }
   else {
-    faceMotion.tiltServoAngle = servoControlMsg.tiltServoAngle
+    faceMotion.tiltServoAngle = servoControlMsg.tiltServoAngle;
   }
 
   if (servoControlMsg.nodServoAngle < 80 || servoControlMsg.nodServoAngle > 150) {
-    nh.logwarn("Base servo was commanded to %u but the range is 10 to 170. Constraining to this range.");
+    nh.logwarn("nodServoAngle out of range 80 to 150. Constraining to range.");
     faceMotion.nodServoAngle = constrain(servoControlMsg.nodServoAngle, 80, 150);
   }
   else {
-    faceMotion.nodServoAngle = servoControlMsg.nodServoAngle
+    faceMotion.nodServoAngle = servoControlMsg.nodServoAngle;
   }
   
   faceMotion.desiredDelay = servoControlMsg.desiredDelay;

@@ -3,7 +3,7 @@
 #include <sensor_msgs/Range.h>
 #include <buddy_msg/buddy_control.h>
 
-// import order here matters, as some of the imports reli
+// import order here matters, as some of the imports rely on others
 #include "pinMapping.h"
 #include "ultrasonicSensor.h"
 #include "servoParallelControl.h"

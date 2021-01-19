@@ -52,6 +52,8 @@ add_message_files(
    FILES
    buddy_control.msg
    word_count.msg
+   buddy_music_note.msg
+   servo_control.msg
  )
 
 ## Generate services in the 'srv' folder

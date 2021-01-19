@@ -1,0 +1,4 @@
+uint8 baseServoAngle
+uint8 nodServoAngle
+uint8 tiltServoAngle
+uint8 desiredDelay

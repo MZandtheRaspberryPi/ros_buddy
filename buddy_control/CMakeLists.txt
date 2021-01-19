@@ -211,3 +211,7 @@ add_dependencies(buddy_control buddy_msg_generate_messages_cpp)
 add_executable(buddy_dance src/buddy_dance.cpp)
 target_link_libraries(buddy_dance ${catkin_LIBRARIES})
 add_dependencies(buddy_dance buddy_msg_generate_messages_cpp)
+add_executable(buddy_birthday_dance src/buddy_birthday_dance.cpp)
+target_link_libraries(buddy_birthday_dance ${catkin_LIBRARIES})
+add_dependencies(buddy_birthday_dance buddy_msg_generate_messages_cpp)
+
