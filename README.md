@@ -1,5 +1,5 @@
 ## Buddy Robot Dance with ROS
-This was a fun project to get a robot to dance using ROS. I used a robot from Slant Concepts and recoded it to work with ROS, via rosserial and a bluetooth connection. You can see a video demo [here](https://www.youtube.com/watch?v=lPwQDNUrtrs).    
+This was a fun project to get a robot to dance using ROS. I used a robot from Slant Concepts and recoded it to work with ROS, via rosserial and a bluetooth connection. You can see a video demo [here](https://www.youtube.com/watch?v=vbnvpwlZbOY).    
 ![buddy_dance](screenshots/buddy_dance.gif)    
 
 [Here's](https://www.littlearmrobot.com/buddy.html) the robot I bought which came with the arduino hardware, the 3d printed parts, and some example arduino code (that I ended up reworking, but was helpful as a base). Use caution before ordering from them because their blog says as of November 2020 they disbanded the company. That said, they were still selling kits when I ordered in December.    
@@ -41,7 +41,7 @@ rosrun rosserial_python serial_node.py /dev/ttyS0 _baud:=9600
 
 From here, you can run the rose node that will do the dance in a third terminal window, and ctrl + c to exit it when you're done.    
 ```
-rosrun buddy_control buddy_dance
+rosrun buddy_control buddy_birthday_dance
 ```
 
 
