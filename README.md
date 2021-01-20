@@ -25,9 +25,10 @@ cd <sketchbook>/libraries
 rm -rf ros_lib
 rosrun rosserial_arduino make_libraries.py .
 ```    
-This should generate the arduino code for the custom messages. Then you open the file buddy_arduino_code.ino from the folder buddy_arduino_code and upload this onto your buddy robot using a wired usb connection (the robot may have to be apart for this step).
+This should generate the arduino code for the custom messages.
 
-### Running the Dance using ROS
+### Running the Birthday Dance using ROS
+Then you open the file buddy_birthday_arduino_code.ino from the folder buddy_arduino_code and upload this onto your buddy robot using a wired usb connection (the robot may have to be apart for this step).
 
 From here, launch one terminal window and start roscore:    
 ```
@@ -43,7 +44,11 @@ From here, you can run the rose node that will do the dance in a third terminal 
 ```
 rosrun buddy_control buddy_birthday_dance
 ```
-
+### Running regular dance/publishing ultrasound messages
+Details as above but the arduino file is buddy_arduino_code.ino from the folder buddy_arduino_code and the ros node is:
+```
+rosrun buddy_control buddy_dance
+```
 
 ### Details on Bluetooth Connection
 I was on a virtual machine, so what I did is as follows. With the virtual machine shut down, I paired with the HC-06 using Windows and the bluetooth menu. Then I opened device manager and checked what COM ports were in use. I picked the lowest one, and input that into my virtual machine settings in terms of using the HOST serial port, and giving it to the guest machine. From here, I could access it using the address /dev/ttyS0.    
