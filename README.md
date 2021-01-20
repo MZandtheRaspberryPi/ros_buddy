@@ -28,7 +28,7 @@ rosrun rosserial_arduino make_libraries.py .
 This should generate the arduino code for the custom messages.
 
 ### Running the Birthday Dance using ROS
-Then you open the file buddy_birthday_arduino_code.ino from the folder buddy_arduino_code and upload this onto your buddy robot using a wired usb connection (the robot may have to be apart for this step).
+Then you open the file buddy_birthday_arduino_code.ino from the folder buddy_birthday_arduino_code and upload this onto your buddy robot using a wired usb connection (the robot may have to be apart for this step).
 
 From here, launch one terminal window and start roscore:    
 ```
